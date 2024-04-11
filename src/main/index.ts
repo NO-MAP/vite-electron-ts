@@ -1,6 +1,6 @@
-import { AppService } from './service/entities/AppService'
-import { container } from './service/inversify.config'
-import { TYPES } from './service/types'
+import { AppService } from '@main/service/entities/AppService'
+import { container } from '@main/service/inversify.config'
+import { TYPES } from '@shared/service-interface/types'
 
 const appService = container.get<AppService>(TYPES.AppService)
 appService.init()

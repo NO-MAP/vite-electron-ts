@@ -1,10 +1,9 @@
 import { inject, injectable } from 'inversify'
-import { I_AppService } from '../types/I_AppService'
 import { BrowserWindow, app, ipcMain } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
-import { WindowService } from './WindowService'
-import { TYPES } from '../types'
-import 'reflect-metadata'
+import { WindowService } from '@main/service/entities/WindowService'
+import { TYPES } from '@shared/service-interface/types'
+import { type I_AppService } from '@shared/service-interface/I_AppService'
 
 @injectable()
 export class AppService implements I_AppService {
@@ -13,6 +12,7 @@ export class AppService implements I_AppService {
 
   init(): void {
     console.log('init app')
+    this._windowService.sayHello()
     app.whenReady().then(() => {
       // Set app user model id for windows
       electronApp.setAppUserModelId('com.electron')

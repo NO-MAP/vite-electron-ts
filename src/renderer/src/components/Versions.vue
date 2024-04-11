@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { useService } from '@renderer/hook/useService'
+import { TYPES } from '@shared/service-interface/types'
 import { reactive } from 'vue'
 
 const versions = reactive({ ...window.electron.process.versions })
+
+const appService = useService(TYPES.AppService)
+console.log('appService', appService)
 </script>
 
 <template>

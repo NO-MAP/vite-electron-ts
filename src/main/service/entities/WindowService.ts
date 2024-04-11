@@ -1,10 +1,9 @@
 import { injectable } from 'inversify'
-import { I_WindowService } from '../types/I_WindowService'
 import { BrowserWindow, shell } from 'electron'
 import { is } from '@electron-toolkit/utils'
 import { join } from 'path'
 import icon from '../../../../resources/icon.png?asset'
-import 'reflect-metadata'
+import { type I_WindowService } from '@shared/service-interface/I_WindowService'
 
 @injectable()
 export class WindowService implements I_WindowService {
