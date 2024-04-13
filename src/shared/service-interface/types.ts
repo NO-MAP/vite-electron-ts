@@ -1,17 +1,22 @@
 import { I_AppService } from '@shared/service-interface/I_AppService'
 import { I_ConfigService } from '@shared/service-interface/I_ConfigService'
+import { I_WindowService } from '@shared/service-interface/I_WindowService'
 
-const TYPES = {
-  AppService: Symbol.for('AppService'),
-  ConfigService: Symbol.for('ConfigService'),
-  InvokeService: Symbol.for('InvokeService'),
-  WindowService: Symbol.for('WindowService')
+enum TYPES {
+  AppService = 'AppService',
+  ConfigService = 'ConfigService',
+  InvokeService = 'InvokeService',
+  WindowService = 'WindowService'
 }
 
-type ServiceMap<T = symbol> = T extends typeof TYPES.AppService
-  ? I_AppService
-  : T extends typeof TYPES.ConfigService
-    ? I_ConfigService
-    : never
+const ServiceCallKey = 'Service:Call'
 
-export { TYPES, type ServiceMap }
+type Service<T extends TYPES> = T extends TYPES.ConfigService
+  ? I_ConfigService
+  : T extends TYPES.WindowService
+    ? I_WindowService
+    : T extends TYPES.AppService
+      ? I_AppService
+      : never
+
+export { TYPES, ServiceCallKey, type Service }

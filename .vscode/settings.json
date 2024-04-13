@@ -8,5 +8,9 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["inversify"]
+  "cSpell.words": [
+    "inversify",
+    "rushstack",
+    "typecheck"
+  ]
 }

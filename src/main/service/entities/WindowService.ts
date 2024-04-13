@@ -1,14 +1,19 @@
-import { injectable } from 'inversify'
+import { inject, injectable } from 'inversify'
 import { BrowserWindow, shell } from 'electron'
 import { is } from '@electron-toolkit/utils'
 import { join } from 'path'
 import icon from '../../../../resources/icon.png?asset'
 import { type I_WindowService } from '@shared/service-interface/I_WindowService'
+import { TYPES } from '@shared/service-interface/types'
+import { I_ConfigService } from '@shared/service-interface/I_ConfigService'
 
 @injectable()
 export class WindowService implements I_WindowService {
   mainWindow?: BrowserWindow
+  @inject(TYPES.ConfigService)
+  private _configService!: I_ConfigService
   sayHello(): void {
+    this._configService.sayHello()
     console.log('Hello from WindowService')
   }
 

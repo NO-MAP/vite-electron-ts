@@ -1,6 +1,36 @@
-import { ServiceMap } from '@shared/service-interface/types'
+import { Service, ServiceCallKey, TYPES } from '@shared/service-interface/types'
 
-export const useService = <T = symbol>(type: T): ServiceMap<T> => {
-  console.log('useService', type)
-  return {} as ServiceMap<T>
+function createProxy(serviceName: string) {
+  return new Proxy(
+    {},
+    {
+      get(_, functionName) {
+        return (...payloads: unknown[]) => {
+          return window.electron.ipcRenderer.invoke(
+            ServiceCallKey,
+            serviceName,
+            functionName,
+            ...payloads
+          )
+        }
+      }
+    }
+  )
 }
+
+const servicesProxy = new Proxy(
+  {},
+  {
+    get(_, serviceName) {
+      return createProxy(serviceName as string)
+    }
+  }
+)
+
+function useService<T extends TYPES>(serviceName: T): Service<T> {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return servicesProxy[serviceName]
+}
+
+export default useService
