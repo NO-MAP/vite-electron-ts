@@ -25,7 +25,8 @@
     "@electron-toolkit/utils": "^3.0.0",
     "electron-updater": "^6.1.7",
     "inversify": "^6.0.2",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "robotjs": "^0.6.0"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.2",
