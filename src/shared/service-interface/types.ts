@@ -5,18 +5,17 @@ import { I_WindowService } from '@shared/service-interface/I_WindowService'
 enum TYPES {
   AppService = 'AppService',
   ConfigService = 'ConfigService',
-  InvokeService = 'InvokeService',
   WindowService = 'WindowService'
 }
 
 const ServiceCallKey = 'Service:Call'
 
-type Service<T extends TYPES> = T extends TYPES.ConfigService
-  ? I_ConfigService
-  : T extends TYPES.WindowService
-    ? I_WindowService
-    : T extends TYPES.AppService
-      ? I_AppService
-      : never
+interface ServiceTypeMapping {
+  [TYPES.AppService]: I_AppService
+  [TYPES.ConfigService]: I_ConfigService
+  [TYPES.WindowService]: I_WindowService
+}
+
+type Service<T extends TYPES> = ServiceTypeMapping[T]
 
 export { TYPES, ServiceCallKey, type Service }

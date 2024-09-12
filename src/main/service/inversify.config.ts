@@ -6,8 +6,8 @@ import { AppService } from '@main/service/entities/AppService'
 import 'reflect-metadata'
 
 const container = new Container()
-container.bind<AppService>(TYPES.AppService).to(AppService)
-container.bind<ConfigService>(TYPES.ConfigService).to(ConfigService)
-container.bind<WindowService>(TYPES.WindowService).to(WindowService)
+container.bind<AppService>(TYPES.AppService).to(AppService).inSingletonScope()
+container.bind<ConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope()
+container.bind<WindowService>(TYPES.WindowService).to(WindowService).inSingletonScope()
 
 export { container }
